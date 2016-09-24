@@ -28,7 +28,7 @@ ROBOTSTXT_OBEY = False
 # See http://scrapy.readthedocs.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
 # DOWNLOAD_DELAY = 10 # 10s
-DOWNLOAD_DELAY = 10 # 10mins
+DOWNLOAD_DELAY = 600 # 10mins
 
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
