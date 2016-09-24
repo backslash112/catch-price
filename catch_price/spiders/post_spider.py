@@ -6,8 +6,6 @@ from catch_price.items import PostItem
 from catch_price.settings import *
 from datetime import datetime
 from catch_price.send_email import SendEmail
-from scrapy.log import ScrapyFileLogObserver
-import logging
 
 class PostSpider(scrapy.Spider):
     name = "post"
@@ -18,14 +16,8 @@ class PostSpider(scrapy.Spider):
         finish
     ]
     post_datetime_dic = {}
-
     headers = HEADERS
     cookies = COOKIES
-
-    def __init__(self):
-        logfile = open('testlog.log', 'a')
-        log_observer = log.ScrapyFileLogObserver(logfile, level=log.DEBUG)
-        log_observer.start()
 
     def start_requests(self):
         for u in self.start_urls:
