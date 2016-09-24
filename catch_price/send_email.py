@@ -17,7 +17,8 @@ class SendEmail:
         msg['To'] = receivers
 
         server = smtplib.SMTP_SSL('smtp.qq.com')
-        server.login('459455120@qq.com', '')
+        server.login('459455120@qq.com', 'zerqqfrohyahbici')
         server.sendmail(sender, [receivers], msg.as_string())
         server.quit()
-        logging.info('Image sent.')
+        logging.info('Email sent.')
+        print('Email sent.')
