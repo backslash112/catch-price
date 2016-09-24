@@ -23,14 +23,14 @@ class PostSpider(scrapy.Spider):
 
     def start_requests(self):
         for u in self.start_urls:
-            self.post_datetime_dic[u] = datetime.strptime('01-01 01:01', '%m-%d %H:%M')
             yield scrapy.Request(u, headers=self.headers, cookies=self.cookies, callback=self.parse, dont_filter=True)
 
     def parse(self, response):
+        if response.url not in self.post_datetime_dic:
+            self.post_datetime_dic[response.url] = datetime.strptime('01-01 01:01', '%m-%d %H:%M')
+
         datetime_str = response.css('.feed-block-extras').xpath('text()').extract_first().strip()
         new_datetime = datetime.strptime(datetime_str, '%m-%d %H:%M')
-        if response.url not in self.post_datetime_dic:
-            self.post_datetime_dic[response.url] = new_datetime
 
         if new_datetime > self.post_datetime_dic[response.url]:
             logging.warning('New Price!!!!!!!!!!!!!!!!!!!!')
