@@ -93,7 +93,7 @@ DOWNLOAD_DELAY = 5 # 5s
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
 # LOG_STDOUT = True
-LOG_FILE = '/tmp/scrapy_output.txt'
+LOG_FILE = 'scrapy_output.log'
 
 HEADERS = {
     "Host": "search.smzdm.com",
