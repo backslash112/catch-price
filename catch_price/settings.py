@@ -93,6 +93,7 @@ DOWNLOAD_DELAY = 5 # 5s
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
 # LOG_STDOUT = True
+LOG_LEVEL = 'INFO'
 LOG_FILE = 'scrapy_output.log'
 
 HEADERS = {

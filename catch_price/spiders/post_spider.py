@@ -6,6 +6,7 @@ from catch_price.items import PostItem
 from catch_price.settings import *
 from datetime import datetime
 from catch_price.send_email import SendEmail
+import logging
 
 class PostSpider(scrapy.Spider):
     name = "post"
@@ -32,7 +33,11 @@ class PostSpider(scrapy.Spider):
 
         if new_datetime > self.post_datetime_dic[response.url]:
             self.post_datetime_dic[response.url] = new_datetime
+            logging.warning('{0}: new price!!!!!!!'.format(response.status))
             SendEmail().send(self.get_name_by_url(response.url), response.url)
+            logging.info('sent email')
+        else:
+            logging.info('{0}: same...'.format(response.status))
 
         for u in self.start_urls:
             yield scrapy.Request(u, headers=self.headers, cookies=self.cookies, callback=self.parse, dont_filter=True)
