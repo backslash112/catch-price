@@ -21,8 +21,9 @@ class PostSpider(scrapy.Spider):
     cookies = COOKIES
 
     def start_requests(self):
-        for u in self.start_urls:
-            yield scrapy.Request(u, headers=self.headers, cookies=self.cookies, callback=self.parse, dont_filter=True)
+        while True:
+            for u in self.start_urls:
+                yield scrapy.Request(u, headers=self.headers, cookies=self.cookies, callback=self.parse, dont_filter=True)
 
     def parse(self, response):
         if response.url not in self.post_datetime_dic:
@@ -43,8 +44,8 @@ class PostSpider(scrapy.Spider):
         if datetime.now().hour == 6 and datetime.now().minute < 20:
             SendEmail().send("I'm the smzdm spider, and I just want to tell you I'm fine, take care.", '')
 
-        for u in self.start_urls:
-            yield scrapy.Request(u, headers=self.headers, cookies=self.cookies, callback=self.parse, dont_filter=True)
+        # for u in self.start_urls:
+        #     yield scrapy.Request(u, headers=self.headers, cookies=self.cookies, callback=self.parse, dont_filter=True)
 
     def get_name_by_url(self, url):
         dic = {
