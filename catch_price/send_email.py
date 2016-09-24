@@ -3,6 +3,7 @@
 
 import smtplib
 from email.mime.text import MIMEText
+import logging
 
 class SendEmail:
     def send(self, title, link):
@@ -19,3 +20,4 @@ class SendEmail:
         server.login('459455120@qq.com', '')
         server.sendmail(sender, [receivers], msg.as_string())
         server.quit()
+        logging.info('Image sent.')

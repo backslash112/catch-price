@@ -28,7 +28,7 @@ ROBOTSTXT_OBEY = False
 # See http://scrapy.readthedocs.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
 # DOWNLOAD_DELAY = 10 # 10s
-DOWNLOAD_DELAY = 600 # 10mins
+DOWNLOAD_DELAY = 10 # 10mins
 
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
@@ -91,6 +91,8 @@ DOWNLOAD_DELAY = 600 # 10mins
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
+# LOG_STDOUT = True
+LOG_FILE = '/tmp/scrapy_output.txt'
 
 HEADERS = {
     "Host": "search.smzdm.com",

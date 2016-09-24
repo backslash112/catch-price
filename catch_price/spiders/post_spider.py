@@ -6,6 +6,7 @@ from catch_price.items import PostItem
 from catch_price.settings import *
 from datetime import datetime
 from catch_price.send_email import SendEmail
+import logging
 
 class PostSpider(scrapy.Spider):
     name = "post"
@@ -28,14 +29,17 @@ class PostSpider(scrapy.Spider):
     def parse(self, response):
         datetime_str = response.css('.feed-block-extras').xpath('text()').extract_first().strip()
         new_datetime = datetime.strptime(datetime_str, '%m-%d %H:%M')
-        print(datetime_str)
+        if response.url not in self.post_datetime_dic:
+            self.post_datetime_dic[response.url] = new_datetime
 
-        if response.url in self.post_datetime_dic and new_datetime > self.post_datetime_dic[response.url]:
-            print('new price!!!!!')
+        if new_datetime > self.post_datetime_dic[response.url]:
+            logging.warning('New Price!!!!!!!!!!!!!!!!!!!!')
+            print('New Price!!!!!!!!!')
+            self.post_datetime_dic[response.url] = new_datetime
             SendEmail().send(self.get_name_by_url(response.url), response.url)
         else:
+            logging.info('same...')
             print('same...')
-        self.post_datetime_dic[response.url] = new_datetime
 
         for u in self.start_urls:
             yield scrapy.Request(u, headers=self.headers, cookies=self.cookies, callback=self.parse, dont_filter=True)
