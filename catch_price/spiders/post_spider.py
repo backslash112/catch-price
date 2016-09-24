@@ -39,6 +39,10 @@ class PostSpider(scrapy.Spider):
         else:
             logging.info('{0}: same...'.format(response.status))
 
+        # Tell the admin I'm fine
+        if datetime.now().hour == 6 and datetime.now().minute < 20:
+            SendEmail().send("I'm the smzdm spider, and I just want to tell you I'm fine, take care.", '')
+
         for u in self.start_urls:
             yield scrapy.Request(u, headers=self.headers, cookies=self.cookies, callback=self.parse, dont_filter=True)
 
