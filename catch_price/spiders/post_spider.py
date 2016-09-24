@@ -1,3 +1,6 @@
+#!/usr/bin/python
+#coding:utf-8
+
 import scrapy
 from catch_price.items import PostItem
 from catch_price.settings import *
