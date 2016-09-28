@@ -45,6 +45,7 @@ class PostSpider(scrapy.Spider):
         print(new_datetime)
         print(self.post_datetime_dic[response.url])
         print("new_datetime: {0}, current_datetime: {1}".format(self.datetime2str(new_datetime), self.datetime2str(self.post_datetime_dic[response.url])))
+        logging.info("new_datetime: {0}, current_datetime: {1}".format(self.datetime2str(new_datetime), self.datetime2str(self.post_datetime_dic[response.url])))
         if new_datetime > self.post_datetime_dic[response.url]:
             self.post_datetime_dic[response.url] = new_datetime
             logging.warning('{0}: new price!!!!!!!'.format(response.status))
